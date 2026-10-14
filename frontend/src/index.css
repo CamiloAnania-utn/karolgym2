@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-cream;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  ::selection {
+    @apply bg-coral text-ink;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-coral text-ink font-body font-bold
+           px-6 py-3 text-sm tracking-tight hover:bg-coral-soft transition-colors
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-cream/30 text-cream font-body font-semibold
+           px-6 py-3 text-sm hover:border-cream hover:bg-cream/5 transition-colors;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 text-cream/80 font-body font-semibold
+           px-4 py-2 text-sm hover:text-cream transition-colors;
+  }
+  .card {
+    @apply bg-ink-surface border border-ink-line rounded-lg;
+  }
+  .input {
+    @apply w-full bg-ink-surface border border-ink-line px-4 py-3 text-cream placeholder:text-cream-muted
+           focus:outline-none focus:border-coral transition-colors;
+  }
+  .label {
+    @apply block text-sm font-semibold text-cream-muted mb-2;
+  }
+  .section {
+    @apply px-5 sm:px-8 lg:px-16;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold border;
+  }
+}
