@@ -41,11 +41,17 @@ const PORT = process.env.PORT || 4000;
 async function start() {
   try {
     await sequelize.authenticate();
-    console.log("✅ Conectado a PostgreSQL");
-    // En desarrollo: sincroniza los modelos con la base.
-    // En produccion, reemplazar por migraciones reales (sequelize-cli).
-    await sequelize.sync();
-    console.log("✅ Modelos sincronizados");
+console.log("✅ Conectado a PostgreSQL");
+try {
+  await sequelize.sync();
+  console.log("✅ Modelos sincronizados");
+} catch (syncErr) {
+  if (syncErr.original?.code === "42P07") {
+    console.log("ℹ️  Los modelos ya estaban sincronizados (otra instancia los creo primero)");
+  } else {
+    throw syncErr;
+  }
+}
 
     app.listen(PORT, () => console.log(`🧡 KAROLGYM API corriendo en http://localhost:${PORT}`));
   } catch (err) {
